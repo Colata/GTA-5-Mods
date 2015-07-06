@@ -16,8 +16,6 @@ public class Main : Script
     Ped player = Game.Player.Character;
     Player playerplayer = Game.Player;
 
-    bool playerRadius = false;
-
     public Main()
     {
         KeyUp += OnKeyUp;       
