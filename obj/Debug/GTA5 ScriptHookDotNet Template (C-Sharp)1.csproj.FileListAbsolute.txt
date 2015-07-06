@@ -1,0 +1,5 @@
+C:\Users\samuel\Documents\Visual Studio 2013\Projects\Mod\GTA5 ScriptHookDotNet Template (C-Sharp)1\bin\Debug\GTA5 ScriptHookDotNet Template (C-Sharp)1.dll
+C:\Users\samuel\Documents\Visual Studio 2013\Projects\Mod\GTA5 ScriptHookDotNet Template (C-Sharp)1\bin\Debug\GTA5 ScriptHookDotNet Template (C-Sharp)1.pdb
+C:\Users\samuel\Documents\Visual Studio 2013\Projects\Mod\GTA5 ScriptHookDotNet Template (C-Sharp)1\bin\Debug\ScriptHookVDotNet.dll
+C:\Users\samuel\Documents\Visual Studio 2013\Projects\Mod\GTA5 ScriptHookDotNet Template (C-Sharp)1\obj\Debug\GTA5 ScriptHookDotNet Template (C-Sharp)1.dll
+C:\Users\samuel\Documents\Visual Studio 2013\Projects\Mod\GTA5 ScriptHookDotNet Template (C-Sharp)1\obj\Debug\GTA5 ScriptHookDotNet Template (C-Sharp)1.pdb

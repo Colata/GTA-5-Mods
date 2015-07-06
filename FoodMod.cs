@@ -56,8 +56,9 @@ public class Main : Script
 
         if(player.IsAlive)
         {
-            UI.ShowSubtitle(player.Position.ToString);
+            GTA.UI.ShowSubtitle(Game.Player.Character.Position.ToString(), 3000);
         }
+
         Interval = 1000;
     }
 
