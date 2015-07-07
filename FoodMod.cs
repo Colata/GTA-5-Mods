@@ -10,32 +10,32 @@ using GTA;
 using GTA.Math;
 using GTA.Native;
 using Menu = GTA.Menu;
+using System.IO;
 
 public class Main : Script
 {
     Ped player = Game.Player.Character;
     Player playerplayer = Game.Player;
-
-    
-    bool HasEaten = false;
+    GTA.Math.Vector3 playerLoc = Function.Call<GTA.Math.Vector3>(Hash.GET_ENTITY_COORDS, Game.Player, 1);
+    GTA.Math.Vector3 Elevator1 = new GTA.Math.Vector3(-346.4626f, -822.6212f, 31.53736f);
 
     public Main()
     {
         KeyUp += OnKeyUp;
     }
 
+    bool ElevatorRange = false;
+
     private void OnKeyUp(object sender, KeyEventArgs e)
     {
         if (e.KeyCode == Keys.F10)
         {
-            if (this.View.ActiveMenus == 0)
-            {
-                this.foodMenu();
-            }
-            else
-            {
-                View.CloseAllMenus();
-            }
+            float x = Game.Player.Character.Position.X;
+            float y = Game.Player.Character.Position.Y;
+            float z = Game.Player.Character.Position.Z;
+            string GetZoneName = Function.Call<string>(Hash.GET_NAME_OF_ZONE, x, y, z);
+            Logger.Log(string.Format("Zone: {0}\t{1}", GetZoneName, Game.Player.Character.Position.ToString()));
+            UI.Notify("Log Updated");
         }
     }
 
@@ -45,23 +45,9 @@ public class Main : Script
         if (player.IsDead)
             View.CloseAllMenus();
 
-        if(!HasEaten)
-        {
-            Starving();
-        }
-        else
-        {
-            Full();
-        }
-
-        if(player.IsAlive)
-        {
-            GTA.UI.ShowSubtitle(Game.Player.Character.Position.ToString(), 3000);
-        }
-
-        Interval = 1000;
+        Blip ElevatorBlip = World.CreateBlip(Elevator1, 3);
+        World.DrawMarker(MarkerType.VerticalCylinder, Elevator1, Vector3.WorldNorth, Vector3.WorldNorth, Vector3.RelativeFront, Color.Yellow);
     }
-
 
     //MENUS
     private void DrawMenu(GTA.Menu MainMenu)
@@ -100,13 +86,20 @@ public class Main : Script
     {
         List<IMenuItem> mainMenuList = new List<IMenuItem>();
 
-        var FoodEatButton = new GTA.MenuButton("Eat Food", "Eat some food!");
-        FoodEatButton.Activated += (sender, args) =>
+        var cruiseControl = new GTA.MenuButton("Cruise Control", "Take your foot of the pedal!");
+        cruiseControl.Activated += (sender, args) =>
         {
-            HasEaten = true;
-            UI.Notify("You've eaten food!");
+            if(player.IsInVehicle() && player.IsAlive)
+            {
+                float vehSpeed = Function.Call<float>(Hash.GET_ENTITY_SPEED, player);
+                player.CurrentVehicle.Speed = vehSpeed;
+            }
+            else
+            {
+                UI.ShowSubtitle("You must be in a vehicle to enable Cruise Control", 5000);
+            }
         };
-        mainMenuList.Add(FoodEatButton);
+        mainMenuList.Add(cruiseControl);        
 
         var ExitButton = new GTA.MenuButton("Exit", "Return to the game!");
         ExitButton.Activated += (sender, args) => Exit();
@@ -119,12 +112,11 @@ public class Main : Script
     //MENUS
 
     void Starving()
-    {       
-        Function.Call(Hash._SET_PLAYER_HEALTH_REGENERATION_RATE, Game.Player, -1.5);
+    {
     }
     void Full()
     {
-        Function.Call(Hash._SET_PLAYER_HEALTH_REGENERATION_RATE, Game.Player, 0.5);
+        Function.Call(Hash._SET_PLAYER_HEALTH_REGENERATION_RATE, Game.Player.Character, 10);
     }
 
     void PreviousMenu()
