@@ -19,11 +19,13 @@ public class Main : Script
     bool unionRadius = false;
     bool iaaRadius = false;
     bool fibRadius = false;
+    bool halfConstructedBuildingRadius = false;
     
     GTA.Math.Vector3 mazeBankElevator = new GTA.Math.Vector3(-59.82701f, -790.3538f, 44.22732f);
     GTA.Math.Vector3 unionElevator = new GTA.Math.Vector3(6.295846f, -709.3442f, 45.97305f);
     GTA.Math.Vector3 iaaElevator = new GTA.Math.Vector3(105.3145f, -625.6478f, 44.22019f);
     GTA.Math.Vector3 fibElevator = new GTA.Math.Vector3(99.49534f, -743.5652f, 45.75476f);
+    GTA.Math.Vector3 halfConstructedBuildingElevator = new GTA.Math.Vector3(-184.1684f, -1016.074f, 30.07096f);
 
     public Main()
     {
@@ -49,6 +51,11 @@ public class Main : Script
         {
             FIBBlip.Sprite = BlipSprite.Helicopter;
             FIBBlip.Scale = 75f;
+        }
+        Blip HalfConstructedBuildingBlip = World.CreateBlip(halfConstructedBuildingElevator, 2);
+        {
+            HalfConstructedBuildingBlip.Sprite = BlipSprite.Helicopter;
+            HalfConstructedBuildingBlip.Scale = 75f;
         }
     }
 
@@ -161,6 +168,22 @@ public class Main : Script
                 UI.Notify("There is no Elevator around!");
             }
         }
+        //HALF CONSTRUCTED BUILDING 
+        if (halfConstructedBuildingRadius && !player.IsInVehicle())
+        {
+            if (e.KeyCode == Keys.F && halfConstructedBuildingRadius)
+            {
+                Game.Player.Character.Position = new Vector3(-159.6062f, -944.0149f, 269.218f);
+            }
+            if (e.KeyCode == Keys.F && halfConstructedBuildingRadius && player.IsInVehicle())
+            {
+                UI.Notify("You must be on foot to use the Elevator!");
+            }
+            if (e.KeyCode == Keys.F && !halfConstructedBuildingRadius && !player.IsInVehicle())
+            {
+                UI.Notify("There is no Elevator around!");
+            }
+        }
     }   
 
     private void OnTick(object sender, EventArgs e)
@@ -169,6 +192,7 @@ public class Main : Script
         float unionElevatorDistance = GTA.World.GetDistance(player.Position, unionElevator);
         float iaaElevatorDistance = GTA.World.GetDistance(player.Position, iaaElevator);
         float fibElevatorDistance = GTA.World.GetDistance(player.Position, fibElevator);
+        float halfConstructedBuildingElevatorDistance = GTA.World.GetDistance(player.Position, halfConstructedBuildingElevator);
 
         //MAZE BANK
 
@@ -193,9 +217,7 @@ public class Main : Script
         {
             unionRadius = false;
         }
-
         //IAA BUILDING
-
         if (iaaElevatorDistance < 2f && !player.IsInVehicle())
         {
             UI.ShowSubtitle("Press F to travel to the top of the IAA Building");
@@ -205,9 +227,7 @@ public class Main : Script
         {
             iaaRadius = false;
         }
-
         //FIB Building
-
         if (fibElevatorDistance < 2f && !player.IsInVehicle())
         {
             UI.ShowSubtitle("Press F to travel to the top of the FIB Building");
@@ -217,7 +237,16 @@ public class Main : Script
         {
             fibRadius = false;
         }
-
+        //HALF CONSTRUCTED BUILDING
+        if (halfConstructedBuildingElevatorDistance < 2f && !player.IsInVehicle())
+        {
+            UI.ShowSubtitle("Press F to travel to the top of the Building");
+            halfConstructedBuildingRadius = true;
+        }
+        else
+        {
+            halfConstructedBuildingRadius = false;
+        }
         Interval = 10;
     }
     /*
