@@ -293,21 +293,20 @@ public class ElevatorMod : Script
 
     public void OnKeyUp(object sender, KeyEventArgs e)
     {
+        Vector3 playerPos = Game.Player.Character.Position;
+
+        float x = Game.Player.Character.Position.X;
+        float y = Game.Player.Character.Position.Y;
+        float z = Game.Player.Character.Position.Z;
+        string GetZoneName = Function.Call<string>(Hash.GET_NAME_OF_ZONE, x, y, z);
+        
         if (e.KeyCode == Keys.F10)
         {
-            float x = Game.Player.Character.Position.X;
-            float y = Game.Player.Character.Position.Y;
-            float z = Game.Player.Character.Position.Z;          
-            string GetZoneName = Function.Call<string>(Hash.GET_NAME_OF_ZONE, x, y, z);
             Logger.Log(string.Format("Zone: {0}\t{1}", GetZoneName, Game.Player.Character.Position.ToString()));
             UI.Notify("Log Updated");
         }
         if (e.KeyCode == Keys.F11)
-        {
-            float x = Game.Player.Character.Position.X;
-            float y = Game.Player.Character.Position.Y;
-            float z = Game.Player.Character.Position.Z;
-            string GetZoneName = Function.Call<string>(Hash.GET_NAME_OF_ZONE, x, y, z);
+        {          
             UI.ShowSubtitle(Game.Player.Character.Position.ToString(), 5000);
         }
 
