@@ -48,8 +48,12 @@
     <Compile Include="ElevatorMod.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Logger.cs" />
+    <Compile Include="LifeModMenu.cs" />
+    <Compile Include="Logger.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="LifeMod.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
