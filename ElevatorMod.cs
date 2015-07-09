@@ -12,11 +12,11 @@ using GTA.Native;
 using Menu = GTA.Menu;
 using System.IO;
 
-public class Main : Script
+public class ElevatorMod : Script
 {
     public static Ped player = Game.Player.Character;
 
-    public Main()
+    public ElevatorMod()
     {
         Tick += OnTick;
         KeyUp += OnKeyUp;
@@ -51,6 +51,11 @@ public class Main : Script
             Hospital1Blip.Sprite = BlipSprite.Helicopter;
             Hospital1Blip.Scale = 75f;
         }
+        Blip BadgerCenterBlip = World.CreateBlip(badgerCenterElevatorBOTTOM, 2);
+        {
+            BadgerCenterBlip.Sprite = BlipSprite.Helicopter;
+            BadgerCenterBlip.Scale = 75f;
+        }
     }
 
     //BOTTOM Radius
@@ -60,6 +65,7 @@ public class Main : Script
     bool fibRadiusBOTTOM = false;
     bool halfConstructedBuildingRadiusBOTTOM = false;
     bool hospital1RadiusBOTTOM = false;
+    bool badgerCenterRadiusBOTTOM = false;
     //TOP Radius
     bool mazeBankRadiusTOP = false;
     bool unionRadiusTOP = false;
@@ -67,6 +73,7 @@ public class Main : Script
     bool fibRadiusTOP = false;
     bool halfConstructedBuildingRadiusTOP = false;
     bool hospital1RadiusTOP = false;
+    bool badgerCenterRadiusTOP = false;
 
     //BOTTOM CORDS
     GTA.Math.Vector3 mazeBankElevatorBOTTOM = new GTA.Math.Vector3(-59.82701f, -790.3538f, 44.22732f);
@@ -75,6 +82,7 @@ public class Main : Script
     GTA.Math.Vector3 fibElevatorBOTTOM = new GTA.Math.Vector3(99.49534f, -743.5652f, 45.75476f);
     GTA.Math.Vector3 halfConstructedBuildingElevatorBOTTOM = new GTA.Math.Vector3(-184.1684f, -1016.074f, 30.07096f);
     GTA.Math.Vector3 hospital1ElevatorBOTTOM = new GTA.Math.Vector3(360.2171f, -584.9374f, 28.8215f);
+    GTA.Math.Vector3 badgerCenterElevatorBOTTOM = new GTA.Math.Vector3(478.8547f, -107.6386f, 63.1579f);
     //TOP CORDS
     GTA.Math.Vector3 mazeBankElevatorTOP = new GTA.Math.Vector3(-66.43941f, -822.1783f, 321.2873f);
     GTA.Math.Vector3 unionElevatorTOP = new GTA.Math.Vector3(-2.279792f, -690.0576f, 250.4136f);
@@ -82,6 +90,7 @@ public class Main : Script
     GTA.Math.Vector3 fibElevatorTOP = new GTA.Math.Vector3(132.4646f, -726.3422f, 258.1525f);
     GTA.Math.Vector3 halfConstructedBuildingElevatorTOP = new GTA.Math.Vector3(-159.6062f, -944.0149f, 269.218f);
     GTA.Math.Vector3 hospital1ElevatorTOP = new GTA.Math.Vector3(340.2888f, -584.173f, 74.1657f);
+    GTA.Math.Vector3 badgerCenterElevatorTOP = new GTA.Math.Vector3(469.7626f, -107.6571f, 117.6346f);
 
     private void OnTick(object sender, EventArgs e)
     {
@@ -104,6 +113,9 @@ public class Main : Script
         //Hopsital1 Markers
         Function.Call(Hash.DRAW_MARKER, 2, 360.2171f, -584.9374f, 28.8215f, 0.0f, 0.0f, 0.0f, 180.0f, 0.0f, 0.0f, 0.75f, 0.75f, 0.75f, 204, 204, 1, 100, false, true, 2, false, false, false, false);
         Function.Call(Hash.DRAW_MARKER, 2, 340.2888f, -584.173f, 74.1657f, 0.0f, 0.0f, 0.0f, 180.0f, 0.0f, 0.0f, 0.75f, 0.75f, 0.75f, 204, 204, 1, 100, false, true, 2, false, false, false, false);
+        //Badger Center Markers
+        Function.Call(Hash.DRAW_MARKER, 2, 478.8547f, -107.6386f, 63.1579f, 0.0f, 0.0f, 0.0f, 180.0f, 0.0f, 0.0f, 0.75f, 0.75f, 0.75f, 204, 204, 1, 100, false, true, 2, false, false, false, false); 
+        Function.Call(Hash.DRAW_MARKER, 2, 469.7626f, -107.6571f, 117.6346f, 0.0f, 0.0f, 0.0f, 180.0f, 0.0f, 0.0f, 0.75f, 0.75f, 0.75f, 204, 204, 1, 100, false, true, 2, false, false, false, false); 
 
         //BOTTOM
         float MazeBankElevatorDistanceBOTTOM = GTA.World.GetDistance(player.Position, mazeBankElevatorBOTTOM);
@@ -112,6 +124,7 @@ public class Main : Script
         float fibElevatorDistanceBOTTOM = GTA.World.GetDistance(player.Position, fibElevatorBOTTOM);
         float halfConstructedBuildingElevatorDistanceBOTTOM = GTA.World.GetDistance(player.Position, halfConstructedBuildingElevatorBOTTOM);
         float hospital1ElevatorDistanceBOTTOM = GTA.World.GetDistance(player.Position, hospital1ElevatorBOTTOM);
+        float badgerCenterDistanceBOTTOM = GTA.World.GetDistance(player.Position, badgerCenterElevatorBOTTOM);
         //TOP
         float MazeBankElevatorDistanceTOP = GTA.World.GetDistance(player.Position, mazeBankElevatorTOP);
         float unionElevatorDistanceTOP = GTA.World.GetDistance(player.Position, unionElevatorTOP);
@@ -119,6 +132,7 @@ public class Main : Script
         float fibElevatorDistanceTOP = GTA.World.GetDistance(player.Position, fibElevatorTOP);
         float halfConstructedBuildingElevatorDistanceTOP = GTA.World.GetDistance(player.Position, halfConstructedBuildingElevatorTOP);
         float hospital1ElevatorDistanceTOP = GTA.World.GetDistance(player.Position, hospital1ElevatorTOP);
+        float badgerCenterDistanceTOP = GTA.World.GetDistance(player.Position, badgerCenterElevatorTOP);
 
         //MAZE BANK BOTTOM
         if (MazeBankElevatorDistanceBOTTOM < 2f && !player.IsInVehicle())
@@ -251,6 +265,29 @@ public class Main : Script
             hospital1RadiusBOTTOM = false;
         }
 
+
+        //BADGER TOP
+        if (badgerCenterDistanceBOTTOM < 2f && !player.IsInVehicle())
+        {
+            UI.ShowSubtitle("Press F to travel to the top of the Hospital");
+            badgerCenterRadiusBOTTOM = true;
+        }
+        else
+        {
+            badgerCenterRadiusBOTTOM = false;
+        }
+        //BADGER TOP
+        if (badgerCenterDistanceTOP < 2f && !player.IsInVehicle())
+        {
+            UI.ShowSubtitle("Press F to travel to the bottom of the Hospital");
+            badgerCenterRadiusTOP = true;
+        }
+        else
+        {
+            badgerCenterRadiusTOP = false;
+        }
+
+
         Interval = 10;
     }
 
@@ -302,33 +339,17 @@ public class Main : Script
         //MAZE BANK BOTTOM
         if (mazeBankRadiusBOTTOM && !player.IsInVehicle())
         {
-            if (e.KeyCode == Keys.F && mazeBankRadiusBOTTOM)
+            if (e.KeyCode == Keys.F)
             {
-                Game.Player.Character.Position = new Vector3(-66.43941f, -822.1783f, 321.2873f); //TOP CORDS
-            }
-            if (e.KeyCode == Keys.F && mazeBankRadiusBOTTOM && player.IsInVehicle())
-            {
-                UI.ShowSubtitle("You can't fit your vehicle in the elevator!");
-            }
-            if (e.KeyCode == Keys.F && !mazeBankRadiusBOTTOM && !player.IsInVehicle())
-            {
-                UI.ShowSubtitle("Are you lost? There's no elevator around!");
+                Game.Player.Character.Position = mazeBankElevatorTOP; //TOP CORDS
             }
         }
         //MAZE BANK TOP
         if (mazeBankRadiusTOP && !player.IsInVehicle())
         {
-            if (e.KeyCode == Keys.F && mazeBankRadiusTOP)
+            if (e.KeyCode == Keys.F)
             {
-                Game.Player.Character.Position = new Vector3(-59.82701f, -790.3538f, 44.22732f); //BOTTOM CORDS
-            }
-            if (e.KeyCode == Keys.F && mazeBankRadiusTOP && player.IsInVehicle())
-            {
-                UI.ShowSubtitle("You can't fit your vehicle in the elevator!");
-            }
-            if (e.KeyCode == Keys.F && !mazeBankRadiusTOP && !player.IsInVehicle())
-            {
-                UI.ShowSubtitle("Are you lost? There's no elevator around!");
+                Game.Player.Character.Position = mazeBankElevatorBOTTOM; //BOTTOM CORDS
             }
         }
 
@@ -336,33 +357,17 @@ public class Main : Script
         //UNION DEPOSITORY BOTTOM
         if (unionRadiusBOTTOM && !player.IsInVehicle())
         {
-            if (e.KeyCode == Keys.F && unionRadiusBOTTOM)
+            if (e.KeyCode == Keys.F)
             {
-                Game.Player.Character.Position = new Vector3(-2.279792f, -690.0576f, 250.4136f); //TOP CORDS
-            }
-            if (e.KeyCode == Keys.F && unionRadiusBOTTOM && player.IsInVehicle()) 
-            {
-                UI.Notify("You must be on foot to use the Elevator!");
-            }
-            if (e.KeyCode == Keys.F && !unionRadiusBOTTOM && !player.IsInVehicle())
-            {
-                UI.Notify("There is no Elevator around!");
+                Game.Player.Character.Position = unionElevatorTOP; //TOP CORDS
             }
         }
         //UNION DEPOSITORY TOP
         if (unionRadiusTOP && !player.IsInVehicle())
         {
-            if (e.KeyCode == Keys.F && unionRadiusTOP)
+            if (e.KeyCode == Keys.F)
             {
-                Game.Player.Character.Position = new Vector3(6.295846f, -709.3442f, 45.97305f); //BOTTOM CORDS
-            }
-            if (e.KeyCode == Keys.F && unionRadiusTOP && player.IsInVehicle())
-            {
-                UI.Notify("You must be on foot to use the Elevator!");
-            }
-            if (e.KeyCode == Keys.F && !unionRadiusTOP && !player.IsInVehicle())
-            {
-                UI.Notify("There is no Elevator around!");
+                Game.Player.Character.Position = unionElevatorBOTTOM; //BOTTOM CORDS
             }
         }
 
@@ -370,33 +375,17 @@ public class Main : Script
         //IAA BUILDING BOTTOM
         if (iaaRadiusBOTTOM && !player.IsInVehicle())
         {
-            if (e.KeyCode == Keys.F && iaaRadiusBOTTOM)
+            if (e.KeyCode == Keys.F)
             {
-                Game.Player.Character.Position = new Vector3(108.269f, -640.4637f, 258.1489f); //TOP CORDS
-            }
-            if (e.KeyCode == Keys.F && iaaRadiusBOTTOM && player.IsInVehicle())
-            {
-                UI.Notify("You must be on foot to use the Elevator!");
-            }
-            if (e.KeyCode == Keys.F && !iaaRadiusBOTTOM && !player.IsInVehicle())
-            {
-                UI.Notify("There is no Elevator around!");
+                Game.Player.Character.Position = iaaElevatorTOP; //TOP CORDS
             }
         }
         //IAA BUILDING TOP
         if (iaaRadiusTOP && !player.IsInVehicle())
         {
-            if (e.KeyCode == Keys.F && iaaRadiusTOP)
+            if (e.KeyCode == Keys.F)
             {
-                Game.Player.Character.Position = new Vector3(105.3145f, -625.6478f, 44.22019f); //BOTTOM CORDS
-            }
-            if (e.KeyCode == Keys.F && iaaRadiusTOP && player.IsInVehicle())
-            {
-                UI.Notify("You must be on foot to use the Elevator!");
-            }
-            if (e.KeyCode == Keys.F && !iaaRadiusTOP && !player.IsInVehicle())
-            {
-                UI.Notify("There is no Elevator around!");
+                Game.Player.Character.Position = iaaElevatorBOTTOM; //BOTTOM CORDS
             }
         }
 
@@ -404,33 +393,17 @@ public class Main : Script
         //FIB BUILDING BOTTOM
         if (fibRadiusBOTTOM && !player.IsInVehicle())
         {
-            if (e.KeyCode == Keys.F && fibRadiusBOTTOM)
+            if (e.KeyCode == Keys.F)
             {
-                Game.Player.Character.Position = new Vector3(132.4646f, -726.3422f, 258.1525f); //TOP CORDS
-            }
-            if (e.KeyCode == Keys.F && fibRadiusBOTTOM && player.IsInVehicle())
-            {
-                UI.Notify("You must be on foot to use the Elevator!");
-            }
-            if (e.KeyCode == Keys.F && !fibRadiusBOTTOM && !player.IsInVehicle())
-            {
-                UI.Notify("There is no Elevator around!");
+                Game.Player.Character.Position = fibElevatorTOP; //TOP CORDS
             }
         }
         //FIB BUILDING TOP
         if (fibRadiusTOP && !player.IsInVehicle())
         {
-            if (e.KeyCode == Keys.F && fibRadiusTOP)
+            if (e.KeyCode == Keys.F)
             {
-                Game.Player.Character.Position = new Vector3(99.49534f, -743.5652f, 45.75476f); //BOTTOM CORDS
-            }
-            if (e.KeyCode == Keys.F && fibRadiusTOP && player.IsInVehicle())
-            {
-                UI.Notify("You must be on foot to use the Elevator!");
-            }
-            if (e.KeyCode == Keys.F && !fibRadiusTOP && !player.IsInVehicle())
-            {
-                UI.Notify("There is no Elevator around!");
+                Game.Player.Character.Position = fibElevatorBOTTOM; //BOTTOM CORDS
             }
         }
 
@@ -438,33 +411,17 @@ public class Main : Script
         //HALF CONSTRUCTED BUILDING BOTTOM
         if (halfConstructedBuildingRadiusBOTTOM && !player.IsInVehicle())
         {
-            if (e.KeyCode == Keys.F && halfConstructedBuildingRadiusBOTTOM)
+            if (e.KeyCode == Keys.F)
             {
-                Game.Player.Character.Position = new Vector3(-159.6062f, -944.0149f, 269.218f); //TOP CORDS
-            }
-            if (e.KeyCode == Keys.F && halfConstructedBuildingRadiusBOTTOM && player.IsInVehicle())
-            {
-                UI.Notify("You must be on foot to use the Elevator!");
-            }
-            if (e.KeyCode == Keys.F && !halfConstructedBuildingRadiusBOTTOM && !player.IsInVehicle())
-            {
-                UI.Notify("There is no Elevator around!");
+                Game.Player.Character.Position = halfConstructedBuildingElevatorTOP; //TOP CORDS
             }
         }
         //HALF CONSTRUCTED BUILDING TOP
         if (halfConstructedBuildingRadiusTOP && !player.IsInVehicle())
         {
-            if (e.KeyCode == Keys.F && halfConstructedBuildingRadiusTOP)
+            if (e.KeyCode == Keys.F)
             {
-                Game.Player.Character.Position = new Vector3(-184.1684f, -1016.074f, 30.07096f); //BOTTOM CORDS
-            }
-            if (e.KeyCode == Keys.F && halfConstructedBuildingRadiusTOP && player.IsInVehicle())
-            {
-                UI.Notify("You must be on foot to use the Elevator!");
-            }
-            if (e.KeyCode == Keys.F && !halfConstructedBuildingRadiusTOP && !player.IsInVehicle())
-            {
-                UI.Notify("There is no Elevator around!");
+                Game.Player.Character.Position = halfConstructedBuildingElevatorBOTTOM; //BOTTOM CORDS
             }
         }
 
@@ -472,34 +429,37 @@ public class Main : Script
         //HOSPITAL1 TOP
         if (hospital1RadiusBOTTOM && !player.IsInVehicle())
         {
-            if (e.KeyCode == Keys.F && hospital1RadiusBOTTOM)
+            if (e.KeyCode == Keys.F)
             {
-                Game.Player.Character.Position = new Vector3(360.2171f, -584.9374f, 28.8215f); //TOP CORDS           
-            }
-            if (e.KeyCode == Keys.F && hospital1RadiusBOTTOM && player.IsInVehicle())
-            {
-                UI.Notify("You must be on foot to use the Elevator!");
-            }
-            if (e.KeyCode == Keys.F && !hospital1RadiusBOTTOM && !player.IsInVehicle())
-            {
-                UI.Notify("There is no Elevator around!");
+                Game.Player.Character.Position = hospital1ElevatorTOP; //TOP CORDS           
             }
         }
         //HOSPITAL1 BOTTOM
         if (hospital1RadiusTOP && !player.IsInVehicle())
         {
-            if (e.KeyCode == Keys.F && hospital1RadiusTOP)
+            if (e.KeyCode == Keys.F)
             {
-                Game.Player.Character.Position = new Vector3(340.2888f, -584.173f, 74.1657f); //BOTTOM CORDS
-            }
-            if (e.KeyCode == Keys.F && hospital1RadiusTOP && player.IsInVehicle())
-            {
-                UI.Notify("You must be on foot to use the Elevator!");
-            }
-            if (e.KeyCode == Keys.F && !hospital1RadiusTOP && !player.IsInVehicle())
-            {
-                UI.Notify("There is no Elevator around!");
+                Game.Player.Character.Position = hospital1ElevatorBOTTOM; //BOTTOM CORDS
             }
         }
+
+
+        //BADGER CENTER TOP
+        if (badgerCenterRadiusBOTTOM && !player.IsInVehicle())
+        {
+            if (e.KeyCode == Keys.F)
+            {
+                Game.Player.Character.Position = badgerCenterElevatorTOP; //TOP CORDS
+            }
+        }
+        //BADGER CENTER BOTTOM
+        if (badgerCenterRadiusTOP && !player.IsInVehicle())
+        {
+            if (e.KeyCode == Keys.F)
+            {
+                Game.Player.Character.Position = badgerCenterElevatorBOTTOM; //BOTTOM CORDS
+            }
+        }
+
     }   
 }
