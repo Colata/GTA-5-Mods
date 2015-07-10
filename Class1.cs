@@ -18,7 +18,8 @@ public class Main : Script
 
     public Main()
     {
-        KeyUp += OnKeyUp;       
+        KeyUp += OnKeyUp;
+        Tick += OnTick;
     }
 
     private void OnKeyUp(object sender, KeyEventArgs e)

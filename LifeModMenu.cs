@@ -17,6 +17,7 @@ partial class LifeMod : Script
     public void LifeModTick()
     {
         Tick += OnTick;
+        Interval = 10;
     }
 
     public void OnTick(object sender, EventArgs e)
@@ -54,8 +55,6 @@ partial class LifeMod : Script
         {
             NotStarving();
         }
-
-        Interval = 5000;
     }
     public void Starving() //Takes 7.30 minutes to die from Starvation (if starving is activated every 5 seconds)
     {
