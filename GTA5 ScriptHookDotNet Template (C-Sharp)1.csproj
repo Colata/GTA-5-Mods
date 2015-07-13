@@ -45,21 +45,39 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BadgerCenter.cs" />
-    <Compile Include="PlayerPosMod.cs">
+    <Compile Include="ArcadiusBusinessCenter.cs" />
+    <Compile Include="ArcadiusBusinessCentreHeliPad.cs" />
+    <Compile Include="BadgerCenter.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="FIB.cs" />
-    <Compile Include="HalfConstructedBuilding.cs" />
-    <Compile Include="Hospital1.cs" />
-    <Compile Include="IAA.cs" />
-    <Compile Include="Logger.cs">
+    <Compile Include="FIB.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MazeBank.cs" />
+    <Compile Include="HalfConstructedBuilding.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Logger.cs" />
+    <Compile Include="MazeBankHeliPad.cs" />
+    <Compile Include="Hospital1.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IAA.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ListMenuItem.cs" />
+    <Compile Include="MazeBank.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PedSpawner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnionDepository.cs" />
-    <Compile Include="World Markers.cs" />
+    <Compile Include="RichardsMajestic.cs" />
+    <Compile Include="RichardsMajesticHeliPad.cs" />
+    <Compile Include="UnionDepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="World Markers.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
