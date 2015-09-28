@@ -45,37 +45,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArcadiusBusinessCenter.cs" />
-    <Compile Include="ArcadiusBusinessCentreHeliPad.cs" />
-    <Compile Include="BadgerCenter.cs">
+    <Compile Include="Dictionary.cs" />
+    <Compile Include="LocationList.cs" />
+    <Compile Include="FROZETPOSITIONLOGGER.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="FIB.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="HalfConstructedBuilding.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MazeBankHeliPad.cs" />
-    <Compile Include="Hospital1.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="IAA.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ListMenuItem.cs" />
-    <Compile Include="MazeBank.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Menu.cs" />
+    <Compile Include="FROZETMENUSLIDER.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RichardsMajestic.cs" />
-    <Compile Include="RichardsMajesticHeliPad.cs" />
-    <Compile Include="UnionDepository.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="World Markers.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Main.cs" />
+    <Compile Include="subTeleportCentral.cs" />
+    <Compile Include="subTeleportEast.cs" />
+    <Compile Include="subTeleportNorth.cs" />
+    <Compile Include="subTeleportSouth.cs" />
+    <Compile Include="subTeleportsRegions.cs" />
+    <Compile Include="subTeleportWest.cs" />
+    <Compile Include="subVehicles.cs" />
+    <Compile Include="subVehiclesList.cs" />
+    <Compile Include="subWeapons.cs" />
+    <Compile Include="subWeaponsList.cs" />
+    <Compile Include="subWeather.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
